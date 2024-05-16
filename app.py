@@ -63,13 +63,12 @@ def form():
             with col5:
                 meat_type = st.multiselect("Meat Consumption", ['Beef', 'Lamb', 'Pork', 'Poultry'], default=None,
                                            label_visibility='visible')
-                dairy_type = st.multiselect("Dairy Consumption", ['Cheese', 'Milk'], default=None,
-                                            label_visibility='visible')
-
-            with col6:
-
                 meat_qty = st.number_input(label="Total Weight", min_value=0, step=1, placeholder='Type',
                                            label_visibility='visible')
+
+            with col6:
+                dairy_type = st.multiselect("Dairy Consumption", ['Cheese', 'Milk'], default=None,
+                                            label_visibility='visible')
                 dairy_qty = st.number_input(label="Total Weight ", min_value=0, step=1,
                                             label_visibility='visible')
                 weight_unit = st.radio('Weighing unit', ['grams', 'lbs'], horizontal=True, label_visibility='visible')
@@ -101,7 +100,7 @@ def form():
             else:
                 dairy_count = 0.0
 
-            total_kg = travel_emission + cooking_emission + meat_count + dairy_count
+            total_kg = round(travel_emission + cooking_emission + meat_count + dairy_count, 2)
             total_lbs = round(total_kg * 2.20462, 2)
 
             st.success(f'Total emission: {total_kg} Kilograms or {total_lbs} lbs of CO₂')
